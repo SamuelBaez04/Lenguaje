@@ -34,4 +34,8 @@ public class ControladorPrincipal {
     public boolean eliminarEstudiante(int codigo){
         return dao.eliminarEstudiante(codigo);
     }
+    
+    public Estudiante[] getEstudiantes(){
+        return dao.getEstudiantes();
+    }
 }

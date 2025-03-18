@@ -58,4 +58,10 @@ public class DAOEstudiante {
         return false;
     }
 
+    public Estudiante[] getEstudiantes() {
+        return estudiantes;
+    }
+    
+    
+    
 }

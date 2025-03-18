@@ -6,6 +6,7 @@ package ventanas;
 
 import controladores.ControladorPrincipal;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Estudiante;
 
 /**
@@ -14,9 +15,8 @@ import modelo.Estudiante;
  */
 public class VentanaEstudiante extends javax.swing.JFrame {
 
-    
     private ControladorPrincipal controlador;
-    
+
     /**
      * Creates new form VentanaEstudiante
      */
@@ -24,6 +24,7 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         controlador = new ControladorPrincipal();
+        llenarTabla();
     }
 
     /**
@@ -176,15 +177,13 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarCampos(){
+    private void limpiarCampos() {
         txtNombre.setText(null);
         txtCodigo.setText(null);
         txtEdad.setText(null);
     }
-    
-    
-    
-    
+
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         String nombre = txtNombre.getText();
@@ -192,10 +191,11 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         int edad = Integer.parseInt(txtEdad.getText());
         Estudiante estudiante = new Estudiante(nombre, codigo, edad);
         boolean respuesta = controlador.guardarEstudiante(estudiante);
-        if(respuesta){
+        if (respuesta) {
             JOptionPane.showMessageDialog(null, "las mejores mi fafa");
             limpiarCampos();
-        }else{
+            llenarTabla();
+        } else {
             JOptionPane.showMessageDialog(null, "Uyy zonas, me daño");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -204,11 +204,11 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         int codigo = Integer.parseInt(txtCodigo.getText());
         Estudiante estudiante = controlador.buscarEstudiante(codigo);
-        if(estudiante != null){
+        if (estudiante != null) {
             txtNombre.setText(estudiante.getNombre());
             txtCodigo.setText(String.valueOf(estudiante.getCodigo()));
             txtEdad.setText(String.valueOf(estudiante.getEdad()));
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ese socio no existe");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -220,10 +220,11 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         int edad = Integer.parseInt(txtEdad.getText());
         Estudiante estudiante = new Estudiante(nombre, codigo, edad);
         boolean respuesta = controlador.editarEstudiante(estudiante);
-        if(respuesta){
+        if (respuesta) {
             JOptionPane.showMessageDialog(null, "Ese socio se cambio de bando");
             limpiarCampos();
-        }else{
+            llenarTabla();
+        } else {
             JOptionPane.showMessageDialog(null, "Ese socio sigue siendo legal");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -232,18 +233,30 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         int codigo = Integer.parseInt(txtCodigo.getText());
         boolean respuesta = controlador.eliminarEstudiante(codigo);
-        if(respuesta){
+        if (respuesta) {
             JOptionPane.showMessageDialog(null, "Ya se dio de baja patron");
             limpiarCampos();
-        }else{
+            llenarTabla();
+        } else {
             JOptionPane.showMessageDialog(null, "Patron la vuelta se cayo");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    
-    
-    
-    
+    private void llenarTabla() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"Nombre", "Codigo", "Edad"});
+        for (int i = 0; i < controlador.getEstudiantes().length; i++) {
+            if (controlador.getEstudiantes()[i] != null) {
+                model.addRow(new Object[]{
+                    controlador.getEstudiantes()[i].getNombre(),
+                    controlador.getEstudiantes()[i].getCodigo(),
+                    controlador.getEstudiantes()[i].getEdad()
+                });
+            }
+        }
+        tableEstudiantes.setModel(model);
+    }
+
     /**
      * @param args the command line arguments
      */
