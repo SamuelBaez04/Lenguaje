@@ -6,7 +6,6 @@ package ventanas;
 
 import controladores.ControladorPrincipal;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import modelo.Estudiante;
 
 /**
@@ -223,6 +222,7 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         boolean respuesta = controlador.editarEstudiante(estudiante);
         if(respuesta){
             JOptionPane.showMessageDialog(null, "Ese socio se cambio de bando");
+            limpiarCampos();
         }else{
             JOptionPane.showMessageDialog(null, "Ese socio sigue siendo legal");
         }
@@ -234,6 +234,7 @@ public class VentanaEstudiante extends javax.swing.JFrame {
         boolean respuesta = controlador.eliminarEstudiante(codigo);
         if(respuesta){
             JOptionPane.showMessageDialog(null, "Ya se dio de baja patron");
+            limpiarCampos();
         }else{
             JOptionPane.showMessageDialog(null, "Patron la vuelta se cayo");
         }

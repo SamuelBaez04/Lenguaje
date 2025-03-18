@@ -15,7 +15,7 @@ public class DAOEstudiante {
     private Estudiante[] estudiantes;
 
     public DAOEstudiante() {
-        this.estudiantes = new Estudiante[1]; // [null, null]
+        this.estudiantes = new Estudiante[2]; // [null, null]
     }
 
     public boolean guardarEstudiante(Estudiante estudiante) {
@@ -30,16 +30,16 @@ public class DAOEstudiante {
 
     public Estudiante buscarEstudiante(int codigo) {
         for (int i = 0; i < estudiantes.length; i++) { //Recorremos el arreglo buscando un estudiante
-            if (estudiantes[i].getCodigo() == codigo) { // si el estudiante que esta en la casilla del iterador tiene el mismo codigo que el que se ingresa por parametro
+            if (estudiantes[i] != null && estudiantes[i].getCodigo() == codigo) { // si el estudiante que esta en la casilla del iterador tiene el mismo codigo que el que se ingresa por parametro
                 return estudiantes[i]; // Notifica que ya hay un estudiante con ese codigo, ya esta creado y en el arreglo
             }
         }
         return null; // Notifica que no hay un estudiante con ese codigo dentro del arreglo
     }
-    
-    public boolean editarEstudiante(Estudiante estudiante){
-        for(int i = 0; i < estudiantes.length; i++){
-            if(estudiantes[i] != null){
+
+    public boolean editarEstudiante(Estudiante estudiante) {
+        for (int i = 0; i < estudiantes.length; i++) {
+            if (estudiantes[i] != null) {
                 estudiantes[i].setNombre(estudiante.getNombre());
                 estudiantes[i].setEdad(estudiante.getEdad());
                 return true;
@@ -47,16 +47,15 @@ public class DAOEstudiante {
         }
         return false;
     }
-    
-    public boolean eliminarEstudiante(int codigo){
+
+    public boolean eliminarEstudiante(int codigo) {
         for (int i = 0; i < estudiantes.length; i++) {
-            if(estudiantes[i].getCodigo() == codigo){
+            if (estudiantes[i].getCodigo() == codigo) {
                 estudiantes[i] = null;
                 return true;
             }
         }
         return false;
     }
-    
-    
+
 }
