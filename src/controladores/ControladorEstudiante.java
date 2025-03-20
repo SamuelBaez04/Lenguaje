@@ -11,11 +11,11 @@ import modelo.Estudiante;
  *
  * @author samue
  */
-public class ControladorPrincipal {
+public class ControladorEstudiante {
     
     private DAOEstudiante dao;
     
-    public ControladorPrincipal(){
+    public ControladorEstudiante(){
         dao = new DAOEstudiante();
     }
     

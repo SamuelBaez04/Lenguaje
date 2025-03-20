@@ -4,7 +4,7 @@
  */
 package ventanas;
 
-import controladores.ControladorPrincipal;
+import controladores.ControladorEstudiante;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Estudiante;
@@ -15,7 +15,7 @@ import modelo.Estudiante;
  */
 public class VentanaEstudiante extends javax.swing.JFrame {
 
-    private ControladorPrincipal controlador;
+    private ControladorEstudiante controlador;
 
     /**
      * Creates new form VentanaEstudiante
@@ -23,7 +23,7 @@ public class VentanaEstudiante extends javax.swing.JFrame {
     public VentanaEstudiante() {
         initComponents();
         setLocationRelativeTo(this);
-        controlador = new ControladorPrincipal();
+        controlador = new ControladorEstudiante();
         llenarTabla();
     }
 
