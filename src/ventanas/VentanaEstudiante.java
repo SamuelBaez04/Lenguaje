@@ -243,18 +243,7 @@ public class VentanaEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void llenarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[]{"Nombre", "Codigo", "Edad"});
-        for (int i = 0; i < controlador.getEstudiantes().length; i++) {
-            if (controlador.getEstudiantes()[i] != null) {
-                model.addRow(new Object[]{
-                    controlador.getEstudiantes()[i].getNombre(),
-                    controlador.getEstudiantes()[i].getCodigo(),
-                    controlador.getEstudiantes()[i].getEdad()
-                });
-            }
-        }
-        tableEstudiantes.setModel(model);
+        tableEstudiantes.setModel(controlador.listar());
     }
 
     /**
